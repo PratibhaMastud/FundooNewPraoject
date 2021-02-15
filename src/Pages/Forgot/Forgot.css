@@ -1,0 +1,115 @@
+#forgot {
+    width: 420px;
+    height: 500px;
+    border: 1px solid #d6d7da;
+    padding: 0px 15px 15px 15px;
+    border-radius: 5px;
+    font-family: arial, sans-serif;
+    line-height: 16px;
+    font-size: 14px;
+    background: #ffffff;
+    margin: 100px auto;
+  }
+  #forgot-logo {
+    margin-top: 30px;
+    display: flex;
+    height: 45px;
+    width: 70;
+    justify-content: center;
+    font-family: arial, sans-serif;
+    font-style: inherit;
+    font-size: x-large;
+  }
+  .forgotBtn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: row;
+    font-size: 14px;
+    padding: 24px 0 20px 0;
+    width: 100%;
+  }
+  .forgot-btn {
+    display: flex;
+    font-size: 14px;
+    padding: 45px 0 0;
+    vertical-align: top;
+    white-space: normal;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  .Logbtn1 {
+    margin-bottom: 25;
+  }
+  .forgot-btnn {
+    margin-bottom: 25;
+  }
+  
+  .loginBtnn {
+    /* margin-right: 35px; */
+    color: #1a73e8;
+  }
+  #heading {
+    color: #202124;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    line-height: 1.5;
+    padding-bottom: 0;
+    padding-top: 8px;
+  
+    /* margin-top: 20px;
+    display: flex;
+    height: 25px;
+    width: 70;
+    justify-content: center;
+    font-family: arial, sans-serif;
+    font-style: inherit;
+    font-size: larger;
+    color: black; */
+  }
+  #signin {
+    color: #202124;
+    padding-bottom: 0;
+    padding-top: 16px;
+    font-family: arial, sans-serif;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 1.3333;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  /*     
+    margin-top: 20px;
+    display: flex;
+    width: 70;
+    font-size: larger;
+    justify-content: center;
+    font-family: arial, sans-serif;
+    color: blue; */
+  
+  #textf {
+    color: #202124;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    line-height: 1.5;
+    padding-bottom: 0;
+    padding-top: 8px;
+    margin-left: 20px;
+    width: 85ch;
+  }
+  .errorMsgD {
+    color: #cc0000;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 600px) {
+    #forgot {
+      width: 50%;
+      background-color: aqua;
+      height: unset;
+    }
+  }
+  

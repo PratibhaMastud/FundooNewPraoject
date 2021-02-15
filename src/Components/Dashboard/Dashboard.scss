@@ -1,0 +1,16 @@
+.appbar-main {
+  
+    .appbar {
+      display: "flex";
+      flex-direction: "row";
+      justify-content: space-between;
+      align-items: start;
+      padding: 8px;
+    }
+    .fundologo {
+      display: flex;
+      justify-content: flex-start;
+      align-items: start;
+    }
+  }
+  
