@@ -13,6 +13,7 @@ import dashboard from './Components/Dashboard/Dashboard';
 import createNote from './Components/Note/CreateNote/Note';
 import displayNote from './Components/Note/DisplayNote/DisplayNote';
 import update from './Components/Note/CustomizedDialogs';
+import iconComp from './Components/Dashboard/BottonIcons';
 //import PrivateRoute from './authguard/PrivateRoute';
 const App = () => {
   
@@ -30,6 +31,8 @@ const App = () => {
           <Route path="/createNote" exact component = {createNote}/>
           <Route path="/displayNote" exact component = {displayNote}/>
           <Route path="/update" exact component = {update}/>
+          <Route path="/iconComp" exact component = {iconComp}/>
+
         </Switch>
       </Router>
     </div>

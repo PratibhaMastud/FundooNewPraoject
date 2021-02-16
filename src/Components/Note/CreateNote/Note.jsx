@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import "./CreateNote.scss";
 import noteService from "../../../Services/NoteServices"; 
-
+import icons from "../../Dashboard/BottonIcons";
 const Note = (props) => {
   const [expand, setExpand] = useState(false);
 
@@ -71,11 +71,11 @@ const Note = (props) => {
             </div>
             <div>
                 <textarea
-              rows="3"
+              rows="1"
               name="description"
               value={note.description}
               onChange={InputEvent}
-              column="60"
+              column="200"
               onClick={expandIt}
               placeholder="Take a note..."
               className="no-outline"
@@ -83,6 +83,7 @@ const Note = (props) => {
             </div>
             
               <div>
+              <icons/>
               {expand ? (
               <Button onClick={addEvent}>
                 Add

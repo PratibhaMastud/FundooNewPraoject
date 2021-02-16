@@ -11,8 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import EditIcon from "@material-ui/icons/Edit";
@@ -26,7 +24,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import NoteIcon from "@material-ui/icons/Note";
 import CreateNote from "../Note/CreateNote/Note";
-import Note from "../Note/DisplayNote/DisplayNote";
+import DisplayNote from "../Note/DisplayNote/DisplayNote";
 import noteService from "../../Services/NoteServices";
 import updateNote from "../Note/CustomizedDialogs";
 import "./Dashboard.scss";
@@ -35,6 +33,8 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    width: "100%",
+    backgroundColor: "#fff",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -204,31 +204,16 @@ function Dashboard() {
     console.log("Use Effect run");
     getAllNotes();
   }
-    , [])
+  , [])
 
-  // const onDelete = (id) => {
-  //   console.log(id);
-    
-  //   let object = {
-  //     isDeleted: true,
-  //      noteIdList:[id]
-  //   };
-
-  //   noteService.deleteNotes(object).then((response) => {
-  //       console.log("delete Item");
-  //   }).catch((error) => {
-  //       console.log(error);
-  //   });
-   
-  // };
 
   const deleteRecord = (id) => {
     console.log(id);
-    var deleteObj = {
+    let data = {
+      noteIdList: [id],
       isDeleted: true,
-      noteIdList: [id]
-    };
-    noteService.deleteNotes(deleteObj).then((response) => {
+    }
+    noteService.deleteNotes(data).then((response) => {
       console.log(response);
       console.log(response.data);
     }).catch((error) => {
@@ -374,7 +359,7 @@ function Dashboard() {
         <div className={classes.toolbar} />
         <>
           <CreateNote passNote={addNote} />
-          <Note
+          <DisplayNote
             noteArray={addItem}
             deletedItem={deleteRecord}
           />

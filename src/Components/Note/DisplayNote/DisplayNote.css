@@ -1,22 +1,36 @@
 .display-main {
     width: 100%;
-   
     display: flex;
     justify-content: space-evenly;
     flex-direction: row-reverse;
     align-items: flex-start;
-    /* flex-grow: 1; */
     flex-wrap: wrap;
-    padding: 10px 10px 10px 10px;
+    
 }
 .display-note {
     width: 20%;
-    height: 30%;
+    height: 20%;
     background-color: #fff;
     border-color: #e0e0e0;
     box-sizing: border-box;
     border-radius: 8px;
     transition-duration: 0.218s;
-    box-shadow: 0 3px 5px rgba(0,0,0,0.20);
-   
+    border: 1px solid #d6d7da;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  
+    /* box-shadow: 0 3px 5px rgba(0,0,0,0.20); */
+}
+.title-note {
+    color: #202124;
+    padding: 12px 10px 0px;
+    text-align: start;
+    font-size: large;
+}
+.content-note{
+    color: #202124;
+    padding: 4px 10px;
+    text-align: start;
+    font-size: revert;
 }

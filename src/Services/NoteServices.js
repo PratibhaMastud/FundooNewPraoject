@@ -27,6 +27,7 @@ const addNote = (data) => {
  const deleteNotes = (object) => {
   return http.post("/notes/trashNotes", object, {
       headers: {
+          'Content-Type' : 'application/json',
           Authorization: localStorage.getItem('token'),
       },
   });
