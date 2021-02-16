@@ -3,8 +3,9 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { withRouter } from 'react-router-dom';
 import './DisplayNote.css';
 import noteService from '../../../Services/NoteServices';
-import CustomizedDialogs from '../../Note/CustomizedDialogs';
 import IconClass from '../../Dashboard/BottonIcons';
+import Popop from '../../files/Popop';
+
 const DisplayNote = (props) => {
     const deleteNote = (e, id) => {
         e.preventDefault();
@@ -13,7 +14,7 @@ const DisplayNote = (props) => {
     }
 
     const [open, setOpen] = React.useState(false);
-
+    const [openPopop, setOpenPopop] = React.useState(false);
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -23,14 +24,12 @@ const DisplayNote = (props) => {
 
     return (
         <>
-        <div className="main-display">
             <div className="display-main">
-
                 {
                     props.noteArray.map((value, index) => {
                         return (
-                            <form className="display-note">
-                                <div className="title-note">
+                            <div className="display-note">
+                                <div className="title-note" onClick = { () => setOpenPopop(true)}>
                                     {value.title}
                                 </div>
                                 <div className="content-note">
@@ -45,17 +44,17 @@ const DisplayNote = (props) => {
                                     </button> */}
                                     <IconClass />
                                 </div>
-                            </form>
+                            </div>
                         )
                     })
                 }
-                {/* <updateNote 
-                open = {handleClickOpen}
-                close = {handleClose}
-            /> */}
+               <Popop
+                openPopop = {openPopop}
+                setOpenPopop = {setOpenPopop}
+               />
 
             </div>
-            </div>
+         
         </>
     );
 };

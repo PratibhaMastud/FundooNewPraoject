@@ -194,6 +194,7 @@ function Dashboard() {
     noteService.getNote().then((response) => {
       console.log(response.data.data.data);
       setAddItem(response.data.data.data);
+      addItem.reverse();
     }).catch((error) => {
       console.log(error);
     });
