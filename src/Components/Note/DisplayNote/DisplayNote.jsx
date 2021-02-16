@@ -13,31 +13,28 @@ const DisplayNote = (props) => {
         props.deletedItem(id);
     }
 
-    const [open, setOpen] = React.useState(false);
     const [openPopop, setOpenPopop] = React.useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+    const [previousNoteArray, setNewNoteArray] = React.useState([]);
+    const onClosePopop = () => {
+        setOpenPopop(false);
+      };
+      const openThePopop = () => {
+        setOpenPopop(true);
+      };
     return (
         <>
             <div className="display-main">
                 {
                     props.noteArray.map((value, index) => {
                         return (
-                            <div className="display-note">
-                                <div className="title-note" onClick = { () => setOpenPopop(true)}>
+                            <div className="display-note" onClick={openThePopop}>
+                                <div className="title-note">
                                     {value.title}
                                 </div>
                                 <div className="content-note">
                                     {value.description}
                                 </div>
-                                
-                               
-                                
+                                                             
                                 <div>
                                     {/* <button className="btn" onClick={(e) => deleteNote(e, value.id)}>
                                         Delete
@@ -50,7 +47,9 @@ const DisplayNote = (props) => {
                 }
                <Popop
                 openPopop = {openPopop}
-                setOpenPopop = {setOpenPopop}
+                onClosePopop = {onClosePopop}
+                previousNoteArray = {previousNoteArray}
+                              
                />
 
             </div>

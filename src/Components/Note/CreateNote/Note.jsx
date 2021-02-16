@@ -5,9 +5,9 @@ import AddIcon from "@material-ui/icons/Add";
 import "./CreateNote.scss";
 import noteService from "../../../Services/NoteServices"; 
 import icons from "../../Dashboard/BottonIcons";
+
 const Note = (props) => {
   const [expand, setExpand] = useState(false);
-
   const [note, setNote] = useState({
     title: "",
     description: "",
