@@ -1,13 +1,17 @@
 .icon-main {
+  width: 100%;
+
   .icon-super{
+    
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 15px;
   }
 
 .child-icon{
   color: #20212487;
   }
+
 } 

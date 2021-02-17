@@ -162,12 +162,11 @@ class Register extends React.Component {
         lastName: this.state.fields.lastName,
         email: this.state.fields.email,
         password: this.state.fields.password,
-        service: "advance",
+        "service": "advance",
       };
-      this.props.history.push("/dashboard");
+      
       userServices.register(userData).then((response) => {
-        console.log(response);
-        console.log(response.data);
+        this.props.history.push("/login");
       });
     }
   };

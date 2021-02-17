@@ -1,14 +1,6 @@
 import http from "./Http";
 
 
-// const addNote = (data, token) => {
-//   return http.post("/notes/addNotes/", data, {
-//     headers: {
-//       Authorization: `${token}`,
-//     },
-//   });
-// };
-
 const addNote = (data) => {
   return http.post("/notes/addNotes", data, {
     headers: {

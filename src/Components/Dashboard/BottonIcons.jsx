@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom";
 import  './icon.scss';
 function BottonIcons() {
     return <div className="icon-main">
+      
         <div className="icon-super">
             <div className="child-icon">
                 <AddAlertIcon />
@@ -24,19 +25,8 @@ function BottonIcons() {
             <div className="child-icon">
                 <MoreVertIcon />
             </div>
-            
-{/*             
-                <AddAlertIcon  className="child-icon"/>
-           
-                <PersonAddIcon className="child-icon"/>
-           
-                <PaletteIcon className="child-icon"/>
-           
-                <InsertPhotoIcon className="child-icon"/>
-           
-                <MoreVertIcon className="child-icon"/>
-             */}
-        </div>
-    </div>
+
+</div>    
+</div>
 }
 export default withRouter(BottonIcons);

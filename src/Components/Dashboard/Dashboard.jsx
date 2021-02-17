@@ -193,8 +193,10 @@ function Dashboard() {
   const getAllNotes = () => {
     noteService.getNote().then((response) => {
       console.log(response.data.data.data);
-      setAddItem(response.data.data.data);
-      addItem.reverse();
+      let arr = response.data.data.data.filter((element) => element.isDeleted == false ); 
+      setAddItem(arr);
+      console.log(arr);
+      
     }).catch((error) => {
       console.log(error);
     });

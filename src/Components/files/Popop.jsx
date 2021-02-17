@@ -6,32 +6,32 @@ import DialogContent from '@material-ui/core/DialogContent';
 export default function Popop(props) {
     const { openPopop, onClosePopop } = props;
 
-    const [title, setTitle] = useState('');
+    const [note, setNote] = useState({
+        title:'',
+        description:''
+    });
     const [description, setDescription] = useState('');
-
+    
     useEffect(() => {
-        setTitle(props.previousNoteArray.title);
-        console.log(title);
-    });
-    useEffect(() => {
-        setDescription(props.previousNoteArray.description);
-        console.log(description);
-
-    });
+        setNote(props.updateCard);
+        console.log(props.updateCard);
+    },[props.updateCard]);
+    
 
     return (
         <Dialog open={openPopop}>
             <DialogTitle>
                 <div className="title-note">
-                  value:{title}
+                 {note.title}
                 </div>
             </DialogTitle>
             <DialogContent>
                 <div className="content-note">
-                    {description}
+                    {note.description}
                 </div>
                 <button onClick={onClosePopop}>close</button>
             </DialogContent>
+            
         </Dialog>
     )
 }

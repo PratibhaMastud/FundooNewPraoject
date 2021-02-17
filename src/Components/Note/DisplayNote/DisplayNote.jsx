@@ -14,12 +14,17 @@ const DisplayNote = (props) => {
     }
 
     const [openPopop, setOpenPopop] = React.useState(false);
-    const [previousNoteArray, setNewNoteArray] = React.useState([]);
+    const [updateCard, setUpdateCard] = React.useState({
+        title: '',
+        description:''
+    });
     const onClosePopop = () => {
         setOpenPopop(false);
       };
-      const openThePopop = () => {
-        setOpenPopop(true);
+      const openThePopop = (card) => {
+          setUpdateCard(card);
+          setOpenPopop(true);
+
       };
     return (
         <>
@@ -27,8 +32,8 @@ const DisplayNote = (props) => {
                 {
                     props.noteArray.map((value, index) => {
                         return (
-                            <div className="display-note" onClick={openThePopop}>
-                                <div className="title-note">
+                            <div className="display-note" >
+                                <div className="title-note" onClick={()=> openThePopop(value)}>
                                     {value.title}
                                 </div>
                                 <div className="content-note">
@@ -36,9 +41,9 @@ const DisplayNote = (props) => {
                                 </div>
                                                              
                                 <div>
-                                    {/* <button className="btn" onClick={(e) => deleteNote(e, value.id)}>
+                                    <button className="btn" onClick={(e) => deleteNote(e, value.id)}>
                                         Delete
-                                    </button> */}
+                                    </button>
                                     <IconClass />
                                 </div>
                             </div>
@@ -48,7 +53,7 @@ const DisplayNote = (props) => {
                <Popop
                 openPopop = {openPopop}
                 onClosePopop = {onClosePopop}
-                previousNoteArray = {previousNoteArray}
+                updateCard = {updateCard}
                               
                />
 
