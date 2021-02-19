@@ -27,7 +27,9 @@ import CreateNote from "../Note/CreateNote/Note";
 import DisplayNote from "../Note/DisplayNote/DisplayNote";
 import noteService from "../../Services/NoteServices";
 import updateNote from "../Note/CustomizedDialogs";
+import Button from '@material-ui/core/Button';
 import "./Dashboard.scss";
+import userService from '../../Services/UserService';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -173,9 +175,14 @@ const useStyles = makeStyles((theme) => ({
   searchCol: {
     color: "#202124cc",
   },
+  logout: {
+    width: "20%",
+    height: "30%",
+
+  },
 }));
 
-function Dashboard() {
+function Dashboard(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -231,10 +238,21 @@ function Dashboard() {
     setAnchorEl(event.currentTarget);
   };
 
-  // const logout = () => {
-  //   localStorage.removeItem("token");
-  //   localStorage.clear(); 
-  //     };
+  const logoutfunction = () => {
+    let token = localStorage.getItem('token');
+    console.log(token);
+    userService.logout(token).then((response) => {
+      console.log(response);
+      if (response.status === 204) {
+        console.log(token);
+        localStorage.setItem("token", "");
+        props.history.push("/");
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
 
@@ -245,11 +263,14 @@ function Dashboard() {
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
-    //className={classes.profile}
+      className={classes.logout}
+      //className={classes.profile}
     >
 
-      <div>
-        <button> Logout</button>
+      <div className="logout">
+          <div>
+                <Button onClick={logoutfunction}>Logout</Button>
+          </div>
       </div>
 
     </Menu>
@@ -359,12 +380,13 @@ function Dashboard() {
         <Divider />
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <div className={classes.toolbar}/>
         <>
           <CreateNote passNote={addNote} />
           <DisplayNote
             noteArray={addItem}
-            deletedItem={deleteRecord}
+            //deletedItem={deleteRecord}
+            getAllNotes={getAllNotes}
           />
 
 

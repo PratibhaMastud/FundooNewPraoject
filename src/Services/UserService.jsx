@@ -17,6 +17,13 @@ const reset = (data, token) => {
     },
   });
 };
+const logout = (tokenAuth) => {
+  return http.post("/user/logout",tokenAuth, {
+    headers: {
+      Authorization: `${tokenAuth}`,
+    },
+  });
+};
 
 // export default UserService;
 
@@ -25,4 +32,5 @@ export default {
   forgot,
   login,
   reset,
+  logout,
 };

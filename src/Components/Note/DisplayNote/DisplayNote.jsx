@@ -1,50 +1,99 @@
 import React from 'react';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import Card from "@material-ui/core/Card";
 import { withRouter } from 'react-router-dom';
 import './DisplayNote.css';
 import noteService from '../../../Services/NoteServices';
 import IconClass from '../../Dashboard/BottonIcons';
 import Popop from '../../files/Popop';
-
+import MenuColor from '../../files/MenuColor';
 const DisplayNote = (props) => {
-    const deleteNote = (e, id) => {
-        e.preventDefault();
-        console.log(id);
-        props.deletedItem(id);
-    }
+
+
+    // const deleteNote = (id) => {
+    //     console.log(id);
+    //     let data = {
+    //         noteIdList: [id],
+    //         isDeleted: true,
+    //       }
+    //       noteService.deleteNotes(data).then((response) => {
+    //         console.log(response);
+    //         console.log(response.data);
+    //       }).catch((error) => {
+    //         console.log(error);
+    //       });
+          
+    // }
 
     const [openPopop, setOpenPopop] = React.useState(false);
     const [updateCard, setUpdateCard] = React.useState({
         title: '',
         description:''
     });
-    const onClosePopop = () => {
+        
+    const [openPalette, setOpenPalette] = React.useState(false);
+
+    const colorPalette = () => {
+        setOpenPalette(!openPalette);
+    };
+
+    const changeNoteColor = (color, note) => {
+        console.log("color note:", note.id);
+
+        let colorObj = {
+          color: color,
+          noteIdList: [note.id],
+        };
+        noteService.colorNote(colorObj).then((response) => {
+            console.log(response);
+            props.getAllNotes();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    };
+
+    const onClosePopop = (updatedNote) => {
         setOpenPopop(false);
+            let obj = {
+                noteId: updatedNote.id,
+                title : updatedNote.title,
+                description: updatedNote.description,
+            };
+        
+           noteService.updateNote(obj).then((response) => {
+            console.log(response.data);
+           }).catch((error) => {
+            console.log(error);
+           })
       };
+
       const openThePopop = (card) => {
           setUpdateCard(card);
-          setOpenPopop(true);
-
+          setOpenPopop(!openPopop);
       };
+
     return (
         <>
             <div className="display-main">
                 {
                     props.noteArray.map((value, index) => {
                         return (
-                            <div className="display-note" >
+                            <div className="display-note" style={{ backgroundColor: value.color }}>
                                 <div className="title-note" onClick={()=> openThePopop(value)}>
                                     {value.title}
                                 </div>
                                 <div className="content-note">
                                     {value.description}
                                 </div>
-                                                             
-                                <div>
-                                    <button className="btn" onClick={(e) => deleteNote(e, value.id)}>
+                                    {/* <button className="btn" onClick={(e) => deleteNote(value.id)}>
                                         Delete
-                                    </button>
-                                    <IconClass />
+                                    </button> */}
+                                    <div >
+                                    <IconClass
+                                    note={value}
+                                    changeNoteColor = {changeNoteColor}
+                                    
+                                    />
                                 </div>
                             </div>
                         )
@@ -52,11 +101,12 @@ const DisplayNote = (props) => {
                 }
                <Popop
                 openPopop = {openPopop}
-                onClosePopop = {onClosePopop}
+               onClosePopop = {onClosePopop}
                 updateCard = {updateCard}
-                              
                />
-
+                <MenuColor 
+                
+                />
             </div>
          
         </>

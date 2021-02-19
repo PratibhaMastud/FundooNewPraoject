@@ -89,8 +89,8 @@ const Note = (props) => {
                 <Icons/>
                 </div>
                 <div className="close-btn">
-                <Button onClick={addEvent}>
-                   close
+                <Button onClick={addEvent} className="font">
+                   <b>close</b>
                 </Button>
                 </div>
                

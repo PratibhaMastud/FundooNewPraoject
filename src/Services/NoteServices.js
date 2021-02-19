@@ -24,10 +24,27 @@ const addNote = (data) => {
       },
   });
 }
+const updateNote = (updateObj) => {
+  return http.post("/notes/updateNotes",updateObj, {
+    headers: {
+      Authorization: localStorage.getItem('token'),
+    },
+  });
+ }
+
+ const colorNote = (colorObj) => {
+  return http.post("/notes/changesColorNotes",colorObj, {
+    headers: {
+      Authorization: localStorage.getItem('token'),
+    },
+  });
+ }
 
 
 export default {
     addNote,
     getNote,
     deleteNotes,
+    updateNote,
+    colorNote,
 };
