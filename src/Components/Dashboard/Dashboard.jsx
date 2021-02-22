@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
+import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Drawer from "@material-ui/core/Drawer";
@@ -26,10 +27,11 @@ import NoteIcon from "@material-ui/icons/Note";
 import CreateNote from "../Note/CreateNote/Note";
 import DisplayNote from "../Note/DisplayNote/DisplayNote";
 import noteService from "../../Services/NoteServices";
-import updateNote from "../Note/CustomizedDialogs";
 import Button from '@material-ui/core/Button';
 import "./Dashboard.scss";
 import userService from '../../Services/UserService';
+import Archive from '../Dashboard/ArchiveComponent/Archive';
+
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -200,7 +202,7 @@ function Dashboard(props) {
   const getAllNotes = () => {
     noteService.getNote().then((response) => {
       console.log(response.data.data.data);
-      let arr = response.data.data.data.filter((element) => element.isDeleted == false ); 
+      let arr = response.data.data.data.filter((e) => e.isArchived === false && e.isDeleted === false); 
       setAddItem(arr);
       console.log(arr);
       
@@ -353,7 +355,7 @@ function Dashboard(props) {
         }}
       >
         <List className={classes.list}>
-          <ListItem button>
+          <ListItem button component={Link} to="/dashboard/note">
             <NoteIcon className={classes.col} />
             <ListItemText primary="Notes" className={classes.notesIcon} />
           </ListItem>
@@ -368,8 +370,8 @@ function Dashboard(props) {
             <EditIcon className={classes.col} />
             <ListItemText primary="Edit" className={classes.notesIcon} />
           </ListItem>
-          <ListItem button>
-            <ArchiveIcon className={classes.col} />
+          <ListItem button component={Link} to="/dashboard/archive">
+            <ArchiveIcon className={classes.col}/>
             <ListItemText primary="Archive" className={classes.notesIcon} />
           </ListItem>
           <ListItem button>
@@ -377,19 +379,22 @@ function Dashboard(props) {
             <ListItemText primary="Bin" className={classes.notesIcon} />
           </ListItem>
         </List>
-        <Divider />
+        <Divider/>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar}/>
         <>
           <CreateNote passNote={addNote} />
-          <DisplayNote
+          {/* <DisplayNote
             noteArray={addItem}
-            //deletedItem={deleteRecord}
             getAllNotes={getAllNotes}
-          />
-
-
+          /> */}
+         <Route path="/dashboard/note">
+           <DisplayNote  noteArray={addItem} getAllNotes={getAllNotes} />
+         </Route>
+         <Route path="/dashboard/archive">
+           <Archive/>
+         </Route>
         </>
       </main>
       {/* {renderMobileMenu} */}

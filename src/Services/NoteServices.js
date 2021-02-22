@@ -40,6 +40,14 @@ const updateNote = (updateObj) => {
   });
  }
 
+ const archiveNote = (archiveObj) => {
+  return http.post("/notes/archiveNotes",archiveObj, {
+    headers: {
+      Authorization: localStorage.getItem('token'),
+    },
+  });
+ }
+
 
 export default {
     addNote,
@@ -47,4 +55,5 @@ export default {
     deleteNotes,
     updateNote,
     colorNote,
+    archiveNote,
 };

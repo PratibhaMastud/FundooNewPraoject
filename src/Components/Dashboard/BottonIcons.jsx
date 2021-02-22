@@ -12,9 +12,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { withRouter } from "react-router-dom";
 import './icon.scss';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import noteService from '../../Services/NoteServices';
-import Button from '@material-ui/core/Button';
-import MenuIcon from "../files/MenuColor";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -100,7 +100,11 @@ const useStyles = makeStyles((theme) => ({
           });
           
     }
-
+    const archiveNoteClick = (e) => {
+        e.preventDefault();
+        console.log(props.note);
+         props.archiveNote(props.note);
+    };
     const changeNoteColor = (e, color) => {
         e.preventDefault();
         props.changeNoteColor(color, props.note);
@@ -127,16 +131,15 @@ const useStyles = makeStyles((theme) => ({
             <div className="child-icon">
                 <InsertPhotoIcon />
             </div>
+            <div className="child-icon" onClick={archiveNoteClick}>
+                <ArchiveIcon/>
+            </div>
             <div className="child-icon" aria-haspopup="true" onClick={handleClickOnMoreIcon}>
                 <MoreVertIcon/>
-               
-                
             </div>
         </div>
         <div>
-            {/* <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        Open Menu
-      </Button> */}
+
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
