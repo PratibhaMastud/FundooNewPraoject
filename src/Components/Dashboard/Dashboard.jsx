@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import InputBase from "@material-ui/core/InputBase";
+import AddAlertIcon from '@material-ui/icons/AddAlert';
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListItem from "@material-ui/core/ListItem";
+import { List, ListItemIcon } from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
-import EditIcon from "@material-ui/icons/Edit";
+import EditIcon from '@material-ui/icons/Edit';
 import { withRouter } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
@@ -24,6 +26,7 @@ import ViewStreamIcon from "@material-ui/icons/ViewStream";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import NoteIcon from "@material-ui/icons/Note";
+import Note from "../Dashboard/CreateNote";
 import CreateNote from "../Note/CreateNote/Note";
 import DisplayNote from "../Note/DisplayNote/DisplayNote";
 import noteService from "../../Services/NoteServices";
@@ -31,13 +34,12 @@ import Button from '@material-ui/core/Button';
 import "./Dashboard.scss";
 import userService from '../../Services/UserService';
 import Archive from '../Dashboard/ArchiveComponent/Archive';
-
+import keep from '../../Assets/keep.png';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    width: "100%",
     backgroundColor: "#fff",
   },
   appBar: {
@@ -102,9 +104,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: "none",
+    color: "#202124cc",
     [theme.breakpoints.up("sm")]: {
       display: "block",
-      color: "#202124cc",
     },
   },
   search: {
@@ -169,7 +171,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(18),
   },
   col: {
-    color: "#20212487",
+     color: "#202124cc",
+    marginRight: theme.spacing(2),
   },
   list: {
     marginTop: theme.spacing(8),
@@ -202,10 +205,10 @@ function Dashboard(props) {
   const getAllNotes = () => {
     noteService.getNote().then((response) => {
       console.log(response.data.data.data);
-      let arr = response.data.data.data.filter((e) => e.isArchived === false && e.isDeleted === false); 
+      let arr = response.data.data.data.filter((e) => e.isArchived === false && e.isDeleted === false);
       setAddItem(arr);
       console.log(arr);
-      
+
     }).catch((error) => {
       console.log(error);
     });
@@ -216,7 +219,7 @@ function Dashboard(props) {
     console.log("Use Effect run");
     getAllNotes();
   }
-  , [])
+    , [])
 
 
   const deleteRecord = (id) => {
@@ -266,13 +269,14 @@ function Dashboard(props) {
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       className={classes.logout}
-      //className={classes.profile}
+    //className={classes.profile}
     >
 
       <div className="logout">
-          <div>
-                <Button onClick={logoutfunction}>Logout</Button>
-          </div>
+        <div>
+          <Button onClick={logoutfunction}>Logout</Button>
+        </div>
+       
       </div>
 
     </Menu>
@@ -302,8 +306,9 @@ function Dashboard(props) {
               })}
             >
               <MenuIcon className={classes.col} />
+              <img src={keep} alt="" />
             </IconButton>
-
+            
             <Typography className={classes.title} variant="h6" noWrap>
               FUNDOO
             </Typography>
@@ -356,45 +361,63 @@ function Dashboard(props) {
       >
         <List className={classes.list}>
           <ListItem button component={Link} to="/dashboard/note">
-            <NoteIcon className={classes.col} />
-            <ListItemText primary="Notes" className={classes.notesIcon} />
+            <ListItemIcon>
+              <EmojiObjectsIcon />
+            </ListItemIcon>
+            <ListItemText className={clsx(handleDrawerOpen)}>
+              Notes
+                    </ListItemText>
           </ListItem>
           <ListItem button>
-            <NotificationsActiveIcon className={classes.col} />
-            <ListItemText
-              primary="Notifications"
-              className={classes.notesIcon}
-            />
+
+            <ListItemIcon>
+              <AddAlertIcon />
+            </ListItemIcon>
+            <ListItemText className={clsx(handleDrawerOpen)}>
+              Reminders
+                    </ListItemText>
+
           </ListItem>
           <ListItem button>
-            <EditIcon className={classes.col} />
-            <ListItemText primary="Edit" className={classes.notesIcon} />
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText className={clsx(handleDrawerOpen)}>
+              Edit labels
+                    </ListItemText>
           </ListItem>
           <ListItem button component={Link} to="/dashboard/archive">
-            <ArchiveIcon className={classes.col}/>
-            <ListItemText primary="Archive" className={classes.notesIcon} />
+            <ListItemIcon>
+              <ArchiveIcon />
+            </ListItemIcon>
+            <ListItemText className={clsx(handleDrawerOpen)}>
+              Archive
+                    </ListItemText>
           </ListItem>
           <ListItem button>
-            <DeleteIcon className={classes.col} />
-            <ListItemText primary="Bin" className={classes.notesIcon} />
+            <ListItemIcon>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText className={clsx(handleDrawerOpen)}>
+              Bin
+                    </ListItemText>
           </ListItem>
         </List>
-        <Divider/>
+        <Divider />
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.toolbar}/>
+        <div className={classes.toolbar} />
         <>
-          <CreateNote passNote={addNote} />
-          {/* <DisplayNote
-            noteArray={addItem}
-            getAllNotes={getAllNotes}
-          /> */}
-         <Route path="/dashboard/note">
-           <DisplayNote  noteArray={addItem} getAllNotes={getAllNotes} />
-         </Route>
-         <Route path="/dashboard/archive">
-           <Archive/>
-         </Route>
+          {/* <CreateNote passNote={addNote}/> */}
+
+
+          <Route path="/dashboard/note">
+            <CreateNote passNote={addNote} />
+            <DisplayNote noteArray={addItem} getAllNotes={getAllNotes} />
+          </Route>
+          <Route path="/dashboard/archive">
+            <Archive />
+          </Route>
         </>
       </main>
       {/* {renderMobileMenu} */}

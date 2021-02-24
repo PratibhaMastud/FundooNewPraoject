@@ -6,7 +6,10 @@
     justify-content: center;
 }
 .display-note {
-    width: 240px;
+    /* width: 240px;
+    min-height: min-content; */
+    width: 270px;
+    height: 30%;
     min-height: fit-content;
     background-color: #fff;
     border-color: #e0e0e0;
@@ -29,3 +32,8 @@
     text-align: start;
     font-size: revert;
 }
+@media only screen and (max-width: 600px) {
+    .display-note {
+        width: 100%;
+    }
+  }

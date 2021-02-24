@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
           noteService.deleteNotes(data).then((response) => {
             console.log(response);
             console.log(response.data);
+            props.getAllNotes();
           }).catch((error) => {
             console.log(error);
           });

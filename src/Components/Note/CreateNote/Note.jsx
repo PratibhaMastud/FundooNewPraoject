@@ -86,7 +86,10 @@ const Note = (props) => {
               {expand ? (
                 <div className="child3">
                 <div className="icon-div">
-                <Icons/>
+                <Icons
+                
+                
+                />
                 </div>
                 <div className="close-btn">
                 <Button onClick={addEvent} className="font">

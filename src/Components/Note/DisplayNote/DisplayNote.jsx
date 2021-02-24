@@ -60,6 +60,7 @@ const DisplayNote = (props) => {
 
         noteService.updateNote(obj).then((response) => {
             console.log(response.data);
+            props.getAllNotes();
         }).catch((error) => {
             console.log(error);
         })
@@ -84,7 +85,7 @@ const DisplayNote = (props) => {
                                     {value.description}
                                 </div>
                                 
-                                <div >
+                                <div>
                                     <IconClass
                                         note={value}
                                         changeNoteColor={changeNoteColor}

@@ -12,7 +12,6 @@ export default function Popop(props) {
         title: '',
         description: ''
     });
-    const [description, setDescription] = useState('');
 
     useEffect(() => {
         setNote(props.updateCard);
